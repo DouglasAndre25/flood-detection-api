@@ -6,6 +6,7 @@
   "author": "DouglasAndre25 <douglas.andrecgn@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "node ./index.js",
     "dev": "nodemon ./index.js"
   },
   "devDependencies": {
