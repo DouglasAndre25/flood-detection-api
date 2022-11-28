@@ -123,6 +123,16 @@ const createRoutes = app => {
         return res.send({ data: response })
     })
 
+    routes.delete('/locations/:id', (req, res, next) => {
+        try {
+            floodValues.splice(req.params.id, 1)
+            const response = floodValues.map(floodValue => floodValue.name)
+            return res.send({ data: response })
+        } catch (err) {
+            console.log(err)
+        }
+    })
+
     app.use(routes)
 }
 
