@@ -7,4 +7,4 @@ const server = app.listen(port, () => {
     console.log(`Rodando na porta ${port}...`)
 })
 
-appWs(server)
+appWs(server, app)

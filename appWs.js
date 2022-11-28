@@ -1,4 +1,5 @@
 const WebSocket = require('ws')
+const { Router } = require('express')
 
 let connections = []
 let floodValues = []
@@ -114,17 +115,28 @@ const checkConnections = () => {
     connections = checkedConnections
 }
 
-module.exports = server => {
+const createRoutes = app => {
+    const routes = new Router()
+
+    routes.get('/locations', (req, res, next) => {
+        const response = floodValues.map(floodValue => floodValue.name)
+        return res.send({ data: response })
+    })
+
+    app.use(routes)
+}
+
+module.exports = (server, app) => {
     const wss = new WebSocket.Server({
         server,
         verifyClient
     })
 
     wss.on('connection', (socket, req) => onConnection(socket, req))
-
     console.log('App Web Socket Server is running!')
-
     setInterval(checkConnections, 30000)
+
+    createRoutes(app)
 
     return wss
 }
