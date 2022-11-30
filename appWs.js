@@ -29,7 +29,7 @@ const onConnection = (socket, req) => {
     setInterval(() => {
         calculateFloodValue()
         sendFloodValue()
-    }, 30000)
+    }, 100000)
     socket.on('error', error => onError(socket, error))
 }
 
@@ -144,7 +144,7 @@ module.exports = (server, app) => {
 
     wss.on('connection', (socket, req) => onConnection(socket, req))
     console.log('App Web Socket Server is running!')
-    setInterval(checkConnections, 30000)
+    setInterval(checkConnections, 100000)
 
     createRoutes(app)
 
